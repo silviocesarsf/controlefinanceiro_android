@@ -15,16 +15,20 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.controlefinanceiro.R;
+import com.example.controlefinanceiro.controllers.ContaController;
+import com.example.controlefinanceiro.utils.MoneyTextWatcher;
 
-public class AddContaScreen extends AppCompatActivity {
+public class ContaAdd extends AppCompatActivity {
     FrameLayout btnBack;
     Button btnSave;
     EditText edtTitulo;
     EditText edtValor;
     EditText edtData;
     String tituloString = null;
-    String valorString = null;
+    Float valorFloat = null;
     String dataString = null;
+    ContaController contaController = new ContaController(this);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,7 @@ public class AddContaScreen extends AppCompatActivity {
         edtValor = findViewById(R.id.edtValor);
         edtData = findViewById(R.id.edtData);
 
+        edtValor.addTextChangedListener(new MoneyTextWatcher(edtValor));
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,10 +61,27 @@ public class AddContaScreen extends AppCompatActivity {
             public void onClick(View v) {
                 tituloString = edtTitulo.getText().toString();
                 dataString = edtData.getText().toString();
-                valorString = edtValor.getText().toString();
+                String textoValor = edtValor.getText().toString();
 
-                if(tituloString.isEmpty() || dataString.isEmpty() || valorString.isEmpty()) {
-                    Toast.makeText(AddContaScreen.this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+                try {
+                    String valorSemR = textoValor.replaceAll("\\s+|R\\$", "");
+
+                    valorSemR = valorSemR.replace(",", ".");
+
+                    valorFloat = Float.parseFloat(valorSemR);
+                } catch (NumberFormatException e) {
+
+                }
+
+                if (tituloString.isEmpty() || dataString.isEmpty() || valorFloat == null) {
+                    Toast.makeText(ContaAdd.this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+                } else {
+                    Boolean statusInsert = contaController.insertConta(tituloString, valorFloat, dataString);
+
+                    if (statusInsert) {
+                        IntentToMain();
+                        Toast.makeText(ContaAdd.this, "Conta salva !", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -67,6 +89,7 @@ public class AddContaScreen extends AppCompatActivity {
 
     private void IntentToMain() {
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("from_add", true);
         startActivity(intent);
         finish();
     }
