@@ -1,6 +1,9 @@
 package com.example.controlefinanceiro.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +20,7 @@ import java.util.HashMap;
 public class Configuration extends AppCompatActivity {
 
     private ContaController contaController = new ContaController(this);
+    ImageView closeConfigBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +33,13 @@ public class Configuration extends AppCompatActivity {
             return insets;
         });
 
-        ArrayList<HashMap<String, String>> retorno = contaController.querySelect("3", "SELECT * FROM Conta WHERE id = ?");
+        closeConfigBtn = findViewById(R.id.closeConfig);
+
+        closeConfigBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Configuration.this, MainActivity.class));
+            }
+        });
     }
 }

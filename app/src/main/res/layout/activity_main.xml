@@ -28,6 +28,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
+            android:id="@+id/btnConfiguracoes"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:padding="10dp"
@@ -67,6 +68,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/exibindoFiltro"
+            android:fontFamily="@font/roboto_bold"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tudo"
+            android:textSize="20sp"
+            android:textColor="@color/main"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <HorizontalScrollView
             android:id="@+id/horizontalScrollView"
             android:layout_width="match_parent"
@@ -83,7 +96,7 @@
 
                 <FrameLayout
                     android:id="@+id/btnAddConta"
-                    android:layout_width="90dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="90dp"
                     android:layout_marginRight="20dp"
                     android:padding="10dp">
@@ -97,11 +110,55 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="bottom|center_horizontal"
+                        android:layout_gravity="center|center_horizontal"
+                        android:layout_marginTop="14dp"
                         android:text="Adicionar"
                         android:textColor="@color/white" />
                 </FrameLayout>
 
+                <FrameLayout
+                    android:id="@+id/btnFiltrarPendentes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="90dp"
+                    android:layout_marginRight="20dp"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/alert" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|center_horizontal"
+                        android:layout_marginTop="14dp"
+                        android:text="Pendentes"
+                        android:textColor="@color/white" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/btnContasPagas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="90dp"
+                    android:layout_marginRight="20dp"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/pagas" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|center_horizontal"
+                        android:layout_marginTop="14dp"
+                        android:text="Pagas"
+                        android:textColor="@color/white" />
+                </FrameLayout>
             </LinearLayout>
         </HorizontalScrollView>
 
@@ -127,526 +184,22 @@
             app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView">
 
             <LinearLayout
+                android:id="@+id/linearCards"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <GridLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="20dp"
-                    android:columnCount="3"
-                    android:rowCount="1">
-
-                    <FrameLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_columnWeight="2">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto"
-                            android:text="Conta de luz"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="left"
-                            android:layout_marginTop="32dp"
-                            android:fontFamily="@font/roboto_bold"
-                            android:text="R$ 159,99"
-                            android:textColor="@color/main"
-                            android:textSize="16sp" />
-
-                    </FrameLayout>
-
-                    <FrameLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_columnWeight="1"
-                        android:layout_gravity="center_vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:fontFamily="@font/roboto"
-                            android:text="Vencimento"
-                            android:textSize="14sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="32dp"
-                            android:fontFamily="@font/roboto_bold"
-                            android:text="22/11/2024"
-                            android:textColor="@color/main"
-                            android:textSize="14sp" />
-
-                    </FrameLayout>
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_columnWeight="1"
-                        android:layout_gravity="bottom|end"
-                        android:src="@drawable/alert" />
-                </GridLayout>
-
-                <GridLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="20dp"
-                    android:columnCount="3"
-                    android:rowCount="1">
-
-                    <FrameLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_columnWeight="2">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto"
-                            android:text="Conta de luz"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="left"
-                            android:layout_marginTop="32dp"
-                            android:fontFamily="@font/roboto_bold"
-                            android:text="R$ 159,99"
-                            android:textColor="@color/main"
-                            android:textSize="16sp" />
-
-                    </FrameLayout>
-
-                    <FrameLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_columnWeight="1"
-                        android:layout_gravity="center_vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:fontFamily="@font/roboto"
-                            android:text="Vencimento"
-                            android:textSize="14sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="32dp"
-                            android:fontFamily="@font/roboto_bold"
-                            android:text="22/11/2024"
-                            android:textColor="@color/main"
-                            android:textSize="14sp" />
-
-                    </FrameLayout>
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_columnWeight="1"
-                        android:layout_gravity="bottom|end"
-                        android:src="@drawable/alert" />
-                </GridLayout>
-                <GridLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="20dp"
-                    android:columnCount="3"
-                    android:rowCount="1">
-
-                    <FrameLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_columnWeight="2">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto"
-                            android:text="Conta de luz"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="left"
-                            android:layout_marginTop="32dp"
-                            android:fontFamily="@font/roboto_bold"
-                            android:text="R$ 159,99"
-                            android:textColor="@color/main"
-                            android:textSize="16sp" />
-
-                    </FrameLayout>
-
-                    <FrameLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_columnWeight="1"
-                        android:layout_gravity="center_vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:fontFamily="@font/roboto"
-                            android:text="Vencimento"
-                            android:textSize="14sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="32dp"
-                            android:fontFamily="@font/roboto_bold"
-                            android:text="22/11/2024"
-                            android:textColor="@color/main"
-                            android:textSize="14sp" />
-
-                    </FrameLayout>
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_columnWeight="1"
-                        android:layout_gravity="bottom|end"
-                        android:src="@drawable/alert" />
-                </GridLayout>
-                <GridLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="20dp"
-                    android:columnCount="3"
-                    android:rowCount="1">
-
-                    <FrameLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_columnWeight="2">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto"
-                            android:text="Conta de luz"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="left"
-                            android:layout_marginTop="32dp"
-                            android:fontFamily="@font/roboto_bold"
-                            android:text="R$ 159,99"
-                            android:textColor="@color/main"
-                            android:textSize="16sp" />
-
-                    </FrameLayout>
-
-                    <FrameLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_columnWeight="1"
-                        android:layout_gravity="center_vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:fontFamily="@font/roboto"
-                            android:text="Vencimento"
-                            android:textSize="14sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="32dp"
-                            android:fontFamily="@font/roboto_bold"
-                            android:text="22/11/2024"
-                            android:textColor="@color/main"
-                            android:textSize="14sp" />
-
-                    </FrameLayout>
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_columnWeight="1"
-                        android:layout_gravity="bottom|end"
-                        android:src="@drawable/alert" />
-                </GridLayout>
-                <GridLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="20dp"
-                    android:columnCount="3"
-                    android:rowCount="1">
-
-                    <FrameLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_columnWeight="2">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto"
-                            android:text="Conta de luz"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="left"
-                            android:layout_marginTop="32dp"
-                            android:fontFamily="@font/roboto_bold"
-                            android:text="R$ 159,99"
-                            android:textColor="@color/main"
-                            android:textSize="16sp" />
-
-                    </FrameLayout>
-
-                    <FrameLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_columnWeight="1"
-                        android:layout_gravity="center_vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:fontFamily="@font/roboto"
-                            android:text="Vencimento"
-                            android:textSize="14sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="32dp"
-                            android:fontFamily="@font/roboto_bold"
-                            android:text="22/11/2024"
-                            android:textColor="@color/main"
-                            android:textSize="14sp" />
-
-                    </FrameLayout>
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_columnWeight="1"
-                        android:layout_gravity="bottom|end"
-                        android:src="@drawable/alert" />
-                </GridLayout>
-                <GridLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="20dp"
-                    android:columnCount="3"
-                    android:rowCount="1">
-
-                    <FrameLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_columnWeight="2">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto"
-                            android:text="Conta de luz"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="left"
-                            android:layout_marginTop="32dp"
-                            android:fontFamily="@font/roboto_bold"
-                            android:text="R$ 159,99"
-                            android:textColor="@color/main"
-                            android:textSize="16sp" />
-
-                    </FrameLayout>
-
-                    <FrameLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_columnWeight="1"
-                        android:layout_gravity="center_vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:fontFamily="@font/roboto"
-                            android:text="Vencimento"
-                            android:textSize="14sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="32dp"
-                            android:fontFamily="@font/roboto_bold"
-                            android:text="22/11/2024"
-                            android:textColor="@color/main"
-                            android:textSize="14sp" />
-
-                    </FrameLayout>
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_columnWeight="1"
-                        android:layout_gravity="bottom|end"
-                        android:src="@drawable/alert" />
-                </GridLayout>
-                <GridLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="20dp"
-                    android:columnCount="3"
-                    android:rowCount="1">
-
-                    <FrameLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_columnWeight="2">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto"
-                            android:text="Conta de luz"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="left"
-                            android:layout_marginTop="32dp"
-                            android:fontFamily="@font/roboto_bold"
-                            android:text="R$ 159,99"
-                            android:textColor="@color/main"
-                            android:textSize="16sp" />
-
-                    </FrameLayout>
-
-                    <FrameLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_columnWeight="1"
-                        android:layout_gravity="center_vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:fontFamily="@font/roboto"
-                            android:text="Vencimento"
-                            android:textSize="14sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="32dp"
-                            android:fontFamily="@font/roboto_bold"
-                            android:text="22/11/2024"
-                            android:textColor="@color/main"
-                            android:textSize="14sp" />
-
-                    </FrameLayout>
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_columnWeight="1"
-                        android:layout_gravity="bottom|end"
-                        android:src="@drawable/alert" />
-                </GridLayout>
-
-                <GridLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="20dp"
-                    android:columnCount="3"
-                    android:rowCount="1">
-
-                    <FrameLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_columnWeight="2">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto"
-                            android:text="Conta de luz"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="left"
-                            android:layout_marginTop="32dp"
-                            android:fontFamily="@font/roboto_bold"
-                            android:text="R$ 159,99"
-                            android:textColor="@color/main"
-                            android:textSize="16sp" />
-
-                    </FrameLayout>
-
-                    <FrameLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_columnWeight="1"
-                        android:layout_gravity="center_vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:fontFamily="@font/roboto"
-                            android:text="Vencimento"
-                            android:textSize="14sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="32dp"
-                            android:fontFamily="@font/roboto_bold"
-                            android:text="22/11/2024"
-                            android:textColor="@color/main"
-                            android:textSize="14sp" />
-
-                    </FrameLayout>
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_columnWeight="1"
-                        android:layout_gravity="bottom|end"
-                        android:src="@drawable/alert" />
-                </GridLayout>
-
-
+                android:orientation="vertical"
+                android:paddingTop="30dp">
+
+                <!--                <TextView-->
+                <!--                    android:id="@+id/semConta"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:text="Não há contas cadastradas"-->
+                <!--                    android:layout_gravity="center"-->
+                <!--                    android:textColor="#D6D6D6"-->
+                <!--                    android:layout_marginTop="60dp"-->
+                <!--                    android:textSize="24sp"-->
+                <!--                    />-->
             </LinearLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,22 +18,28 @@ public class ContaController {
         dbConta = new ContaDB(context);
     }
 
-    public Boolean insertConta(String titulo, float valor, String data) {
+    public Boolean insertConta(String titulo, float valor, String dataVencimento, String dataCriacao, Integer CodigoStatus) {
 
+        // Guia status
+        // 1 - Pendente
+        // 2 - Vencido
+        // 3 - Pago
         SQLiteDatabase db = null;
         try {
             db = dbConta.getWritableDatabase();
             ContentValues values = new ContentValues();
             values.put("Titulo", titulo);
             values.put("Valor", valor);
-            values.put("DataVencimento", data);
+            values.put("DataVencimento", dataVencimento);
+            values.put("DataCriacao", dataCriacao);
+            values.put("CodigoStatus", CodigoStatus);
             db.insert("Conta", null, values);
             return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
         } finally {
-            if(db != null) {
+            if (db != null) {
                 db.close();
             }
         }
@@ -45,7 +51,7 @@ public class ContaController {
 
         try {
             db = dbConta.getReadableDatabase();
-            Cursor cursor = db.rawQuery(query, new String[]{parameter.toString()});
+            Cursor cursor = db.rawQuery(query, parameter != null ? new String[]{parameter.toString()} : null);
             ArrayList<HashMap<String, String>> resultados = new ArrayList<>();
 
             while (cursor.moveToNext()) {
@@ -66,23 +72,4 @@ public class ContaController {
         }
         return null;
     }
-
-    public Boolean dropTable() {
-        Boolean status = false;
-        SQLiteDatabase db = null;
-        try {
-            db = dbConta.getWritableDatabase();
-            db.execSQL("DROP TABLE IF EXISTS Conta");
-            status = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            status = false;
-        } finally {
-            if (db != null) {
-                db.close();
-            }
-        }
-        return status;
-    }
-
 }

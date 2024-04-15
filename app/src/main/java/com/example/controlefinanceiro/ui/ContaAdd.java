@@ -1,8 +1,11 @@
 package com.example.controlefinanceiro.ui;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -17,6 +20,10 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.controlefinanceiro.R;
 import com.example.controlefinanceiro.controllers.ContaController;
 import com.example.controlefinanceiro.utils.MoneyTextWatcher;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class ContaAdd extends AppCompatActivity {
     FrameLayout btnBack;
@@ -76,7 +83,9 @@ public class ContaAdd extends AppCompatActivity {
                 if (tituloString.isEmpty() || dataString.isEmpty() || valorFloat == null) {
                     Toast.makeText(ContaAdd.this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
                 } else {
-                    Boolean statusInsert = contaController.insertConta(tituloString, valorFloat, dataString);
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                    Date dataAtual = new Date();
+                    Boolean statusInsert = contaController.insertConta(tituloString, valorFloat, dataString, formatter.format(dataAtual).toString(), 1);
 
                     if (statusInsert) {
                         IntentToMain();
@@ -85,6 +94,17 @@ public class ContaAdd extends AppCompatActivity {
                 }
             }
         });
+
+        edtData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog();
+            }
+        });
+
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(getResources().getColor(R.color.main));
     }
 
     private void IntentToMain() {
@@ -92,5 +112,27 @@ public class ContaAdd extends AppCompatActivity {
         intent.putExtra("from_add", true);
         startActivity(intent);
         finish();
+    }
+
+    private void showDatePickerDialog() {
+        Calendar calendar = Calendar.getInstance();
+        int ano = calendar.get(Calendar.YEAR);
+        int mes = calendar.get(Calendar.MONTH);
+        int dia = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                Calendar dataSelecionada = Calendar.getInstance();
+                dataSelecionada.set(year, month, dayOfMonth);
+
+                SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
+                String dataFormatada = formatador.format(dataSelecionada.getTime());
+
+                edtData.setText(dataFormatada);
+            }
+        }, ano, mes, dia);
+
+        datePickerDialog.show();
     }
 }

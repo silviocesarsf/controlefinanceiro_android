@@ -2,13 +2,13 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Controlefinanceiro" parent="Theme.Material3.Dark.NoActionBar">
         <!-- Customize your light theme here. -->
-        <item name="color">@color/white</item>
         <item name="android:colorBackground">@color/main</item>
         <item name="android:colorControlActivated">@color/main</item>
         <item name="android:colorControlNormal">#F48F61</item>
         <item name="android:textColor">@color/white</item>
-<!--        <item name="android:statusBarColor">@color/main</item>-->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:statusBarColor">@color/main</item>
+        <item name="colorPrimary">@color/main</item>
+        <item name="colorSecondary">#FF7E42</item>
     </style>
 
     <style name="Theme.Controlefinanceiro" parent="Base.Theme.Controlefinanceiro" />

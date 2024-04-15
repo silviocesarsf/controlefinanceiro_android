@@ -16,12 +16,12 @@ public class ContaDB extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE IF NOT EXISTS Conta (id INTEGER PRIMARY KEY AUTOINCREMENT, Titulo TEXT NOT NULL, Valor FLOAT NOT NULL, DataVencimento DATETIME NOT NULL)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS Conta (id INTEGER PRIMARY KEY AUTOINCREMENT, Titulo TEXT NOT NULL, Valor FLOAT NOT NULL, DataVencimento DATETIME NOT NULL, DataCriacao DATETIME NOT NULL, CodigoStatus TINYINT)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-//        db.execSQL("DROP TABLE IF EXISTS Conta");
-//        onCreate(db);
+        db.execSQL("DROP TABLE IF EXISTS Conta");
+        onCreate(db);
     }
 }

@@ -65,6 +65,7 @@
             android:layout_marginTop="20dp"
             android:fontFamily="@font/roboto_medium"
             android:text="Cadastrar uma nova conta"
+            android:textColor="@color/white"
             android:textSize="27sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -90,8 +91,9 @@
             style="@style/input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:focusable="false"
             android:hint="Data de Vencimento"
-            android:inputType="datetime" />
+            android:inputType="none" />
     </LinearLayout>
 
     <Button
