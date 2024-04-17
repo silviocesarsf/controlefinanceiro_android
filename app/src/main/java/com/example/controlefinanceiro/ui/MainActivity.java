@@ -124,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("titulo", tituloContaArgs);
                 intent.putExtra("valor", valorContaArgs);
                 intent.putExtra("dataVencimento", dataVencimentoArgs);
+                intent.putExtra("id", id);
                 startActivity(intent);
             }
         });
@@ -147,14 +148,14 @@ public class MainActivity extends AppCompatActivity {
     }
     private void ListarTodasContas() {
         inserirLoader();
+        tvExibicaoFiltro.setText("Todos");
+        tvExibicaoFiltro.setTextColor(getResources().getColor(R.color.white));
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 try {
-                    tvExibicaoFiltro.setText("Todos");
-                    tvExibicaoFiltro.setTextColor(getResources().getColor(R.color.white));
-
                     contasSemFiltro = contaController.querySelect(null, "SELECT * FROM Conta");
+
                     if (contasSemFiltro.isEmpty()) {
                         adicionarMensagemSemContas("Nenhuma Conta cadastrada");
                     } else {
@@ -171,13 +172,13 @@ public class MainActivity extends AppCompatActivity {
     }
     private void listarContasPagas() {
         inserirLoader();
+        tvExibicaoFiltro.setText("Pagos");
+        tvExibicaoFiltro.setTextColor(getResources().getColor(R.color.green));
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 try {
                     ArrayList<HashMap<String, String>> retornoFiltradoPago = contaController.querySelect("3", "SELECT * FROM Conta WHERE CodigoStatus = ?");
-                    tvExibicaoFiltro.setText("Pagos");
-                    tvExibicaoFiltro.setTextColor(getResources().getColor(R.color.green));
 
                     if (retornoFiltradoPago.isEmpty()) {
                         adicionarMensagemSemContas("Não há contas pagas");
@@ -195,13 +196,13 @@ public class MainActivity extends AppCompatActivity {
     }
     private void listarContasPendentes() {
         inserirLoader();
+        tvExibicaoFiltro.setText("Pendentes");
+        tvExibicaoFiltro.setTextColor(getResources().getColor(R.color.main));
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 try {
                     ArrayList<HashMap<String, String>> retornoFiltradoPendente = contaController.querySelect("1", "SELECT * FROM Conta WHERE CodigoStatus = ?");
-                    tvExibicaoFiltro.setText("Pendentes");
-                    tvExibicaoFiltro.setTextColor(getResources().getColor(R.color.main));
 
                     if (retornoFiltradoPendente.isEmpty()) {
                         adicionarMensagemSemContas("Não há contas pendentes");

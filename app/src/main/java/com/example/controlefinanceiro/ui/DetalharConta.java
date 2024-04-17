@@ -3,9 +3,14 @@ package com.example.controlefinanceiro.ui;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,10 +24,19 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.controlefinanceiro.R;
+import com.example.controlefinanceiro.controllers.ContaController;
+import com.example.controlefinanceiro.utils.MoneyTextWatcher;
 
 public class DetalharConta extends AppCompatActivity {
     ImageView btnBack;
     TextView tvNomeConta;
+    EditText edtEditarTitulo;
+    EditText edtEditarValor;
+    CheckBox checkPago;
+    Boolean usuarioDefiniuComoPago = false;
+    Button btnSalvarAlteracoes;
+    Button btnExcluirConta;
+    ContaController contaController = new ContaController(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,17 +56,60 @@ public class DetalharConta extends AppCompatActivity {
 
         btnBack = findViewById(R.id.btnBack);
         tvNomeConta = findViewById(R.id.nomeConta);
+        edtEditarTitulo = findViewById(R.id.edtTituloEditar);
+        edtEditarValor = findViewById(R.id.edtValorEditar);
+        checkPago = findViewById(R.id.checkPago);
+        btnSalvarAlteracoes = findViewById(R.id.btnSalvarAlteracoes);
+        btnExcluirConta = findViewById(R.id.btnExcluirConta);
 
-        if(getIntent() != null && getIntent().hasExtra("titulo")) {
+        edtEditarValor.addTextChangedListener(new MoneyTextWatcher(edtEditarValor));
+
+        if (getIntent() != null && getIntent().hasExtra("titulo")) {
             tvNomeConta.setText(getIntent().getStringExtra("titulo"));
+            edtEditarTitulo.setText(getIntent().getStringExtra("titulo"));
+            edtEditarValor.setText(getIntent().getStringExtra("valor"));
+        } else {
+            startActivity(new Intent(DetalharConta.this, MainActivity.class));
+            Log.e("Erro", "Ocorreu um erro ao recuperar informacoes da conta");
+            Toast.makeText(this, "Erro ao recuperar informações", Toast.LENGTH_SHORT).show();
         }
+
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 IntentToMain();
             }
         });
-//        showDialog();
+        checkPago.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    usuarioDefiniuComoPago = true;
+                } else {
+                    usuarioDefiniuComoPago = false;
+                }
+            }
+        });
+
+        btnSalvarAlteracoes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (usuarioDefiniuComoPago) {
+                    Boolean retorno = contaController.updateConta(new String[]{"Teste atualizou", "19,20", "3"}, new String[]{String.valueOf(getIntent().getIntExtra("id", 0))});
+
+                    if (retorno) IntentToMain();
+                }
+            }
+        });
+
+        btnExcluirConta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Boolean retorno = contaController.deleteConta(new String[]{String.valueOf(getIntent().getIntExtra("id", 0))});
+
+                if (retorno) IntentToMain();
+            }
+        });
     }
 
     private void IntentToMain() {

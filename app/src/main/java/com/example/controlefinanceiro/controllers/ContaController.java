@@ -72,4 +72,42 @@ public class ContaController {
         }
         return null;
     }
+
+    public Boolean updateConta(String[] param, String[] whereValue) {
+        Boolean statusTransacao = false;
+        try {
+            SQLiteDatabase db = dbConta.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put("Titulo", param[0]);
+            values.put("Valor", param[1]);
+            values.put("CodigoStatus", param[2]);
+            int rowsAffected = db.update("Conta", values, "id = ?", whereValue);
+            db.close();
+
+            if (rowsAffected > 0) {
+                statusTransacao = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return statusTransacao;
+    }
+
+    public Boolean deleteConta(String[] id) {
+        Boolean statusTransacao = false;
+
+        try {
+            SQLiteDatabase db = dbConta.getWritableDatabase();
+            Integer rowsAffected = db.delete("Conta", "id = ?", id);
+
+            if(rowsAffected > 0) {
+                statusTransacao = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        };
+
+        return statusTransacao;
+    }
 }
